@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>azomi CBT 피드백 양식</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #f3f0fd;
+            margin: 0;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(224, 92, 107, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(224, 92, 107, 0.12);
+        }
+        .header {
+            background: linear-gradient(135deg, #E05C6B, #F0856A);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        form {
+            padding: 24px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D4556A;
+            margin: 25px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #DDD6FE;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4c4c4c;
+        }
+        .form-group label span {
+            font-size: 12px;
+            color: #888;
+            font-weight: normal;
+            display: block;
+            margin-top: 2px;
+        }
+        input[type="text"], input[type="email"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f8fafc;
+            transition: all 0.2s;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #E05C6B;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(224, 92, 107, 0.18);
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #F5F3FE;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #E4DEFB;
+        }
+        .radio-label, .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #374151;
+            line-height: 1.4;
+        }
+        .radio-label input, .checkbox-label input {
+            margin-top: 3px;
+            accent-color: #E05C6B;
+        }
+        .notice-box {
+            background-color: #F5F3FE;
+            border-left: 4px solid #ef4444;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 12px;
+            color: #4C3D9E;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .match-notice {
+            background-color: #F5F3FE;
+            border-left: 4px solid #E05C6B;
+            padding: 14px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #C04458;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .gifticon-box {
+            background: linear-gradient(135deg, #F5F3FE, #E4DEFB);
+            border: 1px solid #F0856A;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 10px;
+        }
+        .gifticon-box .title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #D4556A;
+            margin-bottom: 6px;
+        }
+        .gifticon-box .desc {
+            font-size: 12px;
+            color: #C04458;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        button[type="submit"] {
+            width: 100%;
+            background: linear-gradient(135deg, #E05C6B, #D4556A);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(109, 91, 208, 0.25);
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        #success-message, #error-message {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        #success-message {
+            color: #16a34a;
+            background: #f0fdf4;
+        }
+        #error-message {
+            color: #dc2626;
+            background: #F5F3FE;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #F0856A;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="header-title"><span class="logo-mark"><img src="https://github.com/miname20002-cloud/aurae-backend/blob/main/assets/images/icon.png?raw=true" alt="azomi"></span>azomi CBT 리서치</h1>
+        <p id="header-desc">성실하게 테스트에 참여해 주셔서 진심으로 감사합니다.<br>보내주신 피드백을 바탕으로 더욱 다정한 azomi를 만들겠습니다.</p>
+    </div>
+
+    <form id="feedback-form" action="https://formspree.io/f/xrewjvev" method="POST">
+
+        <div class="match-notice">
+            ⚠️ 반드시 확인해 주세요<br><br>
+            아래 <strong>닉네임과 이메일 주소</strong>는 앱 최초 가입 시 사용하신 정보와 <strong>정확히 일치</strong>해야 합니다.<br>
+            일치하지 않을 경우 테스트 확인 및 기프티콘 발송이 어려울 수 있습니다.
+        </div>
+
+        <div class="section-title">⑴ 테스터 기본 정보</div>
+
+        <div class="form-group">
+            <label for="nickname">사용 닉네임 <span style="color:#D4556A;">* 앱 최초 가입 닉네임과 동일하게 기재</span></label>
+            <input type="text" id="nickname" name="닉네임" required placeholder="앱에서 사용하신 닉네임을 적어주세요">
+        </div>
+
+        <div class="form-group">
+            <label for="signup-email">가입 이메일 주소 <span style="color:#D4556A;">* 앱 최초 가입 이메일과 동일하게 기재</span></label>
+            <input type="email" id="signup-email" name="가입이메일" required placeholder="앱 가입 시 사용한 이메일 주소">
+        </div>
+
+        <div class="form-group">
+            <label>성별 / 연령대</label>
+            <div style="display: flex; gap: 10px;">
+                <select id="gender" name="성별" style="flex: 1;">
+                    <option value="">성별 선택</option>
+                    <option value="남성">남성</option>
+                    <option value="여성">여성</option>
+                    <option value="기타">기타</option>
+                </select>
+                <select id="age-group" name="연령대" style="flex: 1;">
+                    <option value="">연령대 선택</option>
+                    <option value="10대">10대</option>
+                    <option value="20대">20대</option>
+                    <option value="30대">30대</option>
+                    <option value="40대">40대</option>
+                    <option value="50대 이상">50대 이상</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>지역 / 직업</label>
+            <div style="display: flex; gap: 10px;">
+                <select id="region" name="지역" style="flex: 1;">
+                    <option value="">지역 선택</option>
+                    <option value="서울">서울</option>
+                    <option value="경기/인천">경기/인천</option>
+                    <option value="강원">강원</option>
+                    <option value="대전/충청">대전/충청</option>
+                    <option value="광주/전라">광주/전라</option>
+                    <option value="대구/경북">대구/경북</option>
+                    <option value="부산/울산/경남">부산/울산/경남</option>
+                    <option value="제주">제주</option>
+                    <option value="해외">해외</option>
+                </select>
+                <select id="job" name="직업" style="flex: 1;">
+                    <option value="">직업 선택</option>
+                    <option value="학생(중고등)">학생(중고등)</option>
+                    <option value="대학생">대학생</option>
+                    <option value="직장인">직장인</option>
+                    <option value="프리랜서">프리랜서</option>
+                    <option value="자영업">자영업</option>
+                    <option value="공무원">공무원</option>
+                    <option value="무직/취준">무직/취준</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>기혼 여부</label>
+            <div style="display: flex; gap: 20px; padding: 5px 0;">
+                <label class="radio-label"><input type="radio" name="기혼여부" value="미혼"> 미혼</label>
+                <label class="radio-label"><input type="radio" name="기혼여부" value="기혼"> 기혼</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>사용 기종 / 통신사</label>
+            <div style="display: flex; gap: 10px;">
+                <select id="device" name="기종" style="flex: 1;">
+                    <option value="">기종 선택</option>
+                    <option value="갤럭시 S24 시리즈">갤럭시 S24 시리즈</option>
+                    <option value="갤럭시 S23 시리즈">갤럭시 S23 시리즈</option>
+                    <option value="갤럭시 S22 이하">갤럭시 S22 이하</option>
+                    <option value="갤럭시 Z플립/폴드">갤럭시 Z플립/폴드</option>
+                    <option value="갤럭시 A 시리즈">갤럭시 A 시리즈</option>
+                    <option value="기타 안드로이드">기타 안드로이드</option>
+                </select>
+                <select id="carrier" name="통신사" style="flex: 1;">
+                    <option value="">통신사 선택</option>
+                    <option value="SKT">SKT</option>
+                    <option value="KT">KT</option>
+                    <option value="LG U+">LG U+</option>
+                    <option value="알뜰폰">알뜰폰</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="interests">관심 분야</label>
+            <input type="text" id="interests" name="관심분야" placeholder="평소 관심사나 취미를 적어주세요">
+        </div>
+
+        <div class="section-title">⑵ 종합 사용 소감</div>
+
+        <div class="form-group">
+            <label for="good">👍 azomi가 좋았던 점</label>
+            <textarea id="good" name="좋았던점" rows="4" required placeholder="어떤 순간에 정서적 위로나 재미를 느끼셨나요?"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="bad">👎 수정/보완 점 및 버그</label>
+            <textarea id="bad" name="수정보완점" rows="4" placeholder="불편했던 점이나 수정이 필요한 부분을 적어주세요"></textarea>
+        </div>
+
+        <div class="notice-box">
+            📸 대화 중 <strong>엉뚱한 거짓말(Hallucination), 도돌이표 답변(Repetitive response), 문법 및 어휘 오류(Grammar & Vocabulary), 문장 끊김(Cut off)</strong> 현상이 발생했다면, 아래 오픈채팅방으로 스크린샷을 보내주세요!<br><br>
+            💬 카카오톡 오픈채팅: <a href="https://open.kakao.com/o/gmTwz9Ai" target="_blank" style="color:#D4556A; font-weight:700;">open.kakao.com/o/gmTwz9Ai</a> (입장코드: acbt1004)
+        </div>
+
+        <div class="section-title">⑶ UX 대화 경험 체크 포인트</div>
+
+        <div class="form-group">
+            <label for="ux-1">① 친밀감 & 정서적 교감<span>캐릭터의 리액션 온도가 적절하고 감정 대입이 잘 되는가?</span></label>
+            <textarea id="ux-1" name="친밀감_교감" rows="3" placeholder="의견을 입력해 주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="ux-2">② 영문 표현력 & 대화 리드<span>원어민 특유의 감성이 느껴지며 티키타카가 매끄러운가?</span></label>
+            <textarea id="ux-2" name="영문표현력" rows="3" placeholder="의견을 입력해 주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>②-1 언어 장벽<span>영어 대화가 이해하기 어렵거나 부담스러운 부분이 있었나요?</span></label>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="언어장벽" value="전혀 없음"> ▲ 전혀 없음 (편하게 대화함)</label>
+                <label class="radio-label"><input type="radio" name="언어장벽" value="가끔 있음"> ▲ 가끔 있음 (모르는 표현 있었지만 대화는 유지됨)</label>
+                <label class="radio-label"><input type="radio" name="언어장벽" value="자주 있음"> ▲ 자주 있음 (이해 안 되는 부분이 많아 몰입 어려움)</label>
+                <label class="radio-label"><input type="radio" name="언어장벽" value="번역기 사용"> ▲ 번역기/사전 찾아가며 대화함</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ux-3">③ 기억력 (컨텍스트 유지)<span>내가 했던 과거 말이나 맥락을 잊지 않고 잘 유지하는가?</span></label>
+            <textarea id="ux-3" name="기억력" rows="3" placeholder="의견을 입력해 주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="ux-4">④ 발화 속도 및 가독성<span>대화의 흐름과 템포가 루즈하지 않고 적절한가?</span></label>
+            <textarea id="ux-4" name="발화속도_가독성" rows="3" placeholder="의견을 입력해 주세요"></textarea>
+        </div>
+
+        <div class="form-group" id="subscribe-group">
+            <label>⑤ 구독여부 및 희망금액 피드백<span>테스트 후 소감을 솔직하게 말씀해 주세요.</span></label>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="구독의향" value="적극 구독" onchange="handleSubscribeChange(this.value)"> ▲ 적극 구독 (비용 지불하고 계속 사용 의향이 있음)</label>
+                <label class="radio-label"><input type="radio" name="구독의향" value="조건부" onchange="handleSubscribeChange(this.value)"> ▲ 조건부 (한글버전, 캐릭터 추가시 의향있음)</label>
+                <label class="radio-label"><input type="radio" name="구독의향" value="무료유지" onchange="handleSubscribeChange(this.value)"> ▲ 무료유지 (광고 시청 Lite 버전 유지)</label>
+                <label class="radio-label"><input type="radio" name="구독의향" value="의향 없음" onchange="handleSubscribeChange(this.value)"> ▲ 의향 없음</label>
+            </div>
+            <div id="no-interest-thanks" style="display:none; margin-top:10px; padding:14px; background:#F5F3FE; border-left:4px solid #E05C6B; border-radius:0 8px 8px 0; font-size:13px; color:#C04458; line-height:1.7;">
+                소중한 의견 감사합니다.<br>
+                남은 문항은 자유롭게 건너뛰셔도 괜찮아요. 아래 피드백 항목으로 바로 이동할게요 🙏
+            </div>
+        </div>
+
+        <div class="form-group" id="price-group">
+            <label>⑥ 적정 구독 금액은? (월)</label>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="희망금액" value="4900원 미만"> ▲ 4,900원 미만</label>
+                <label class="radio-label"><input type="radio" name="희망금액" value="4900~9900원"> ▲ 4,900원 ~ 9,900원</label>
+                <label class="radio-label"><input type="radio" name="희망금액" value="9900~14900원"> ▲ 9,900원 ~ 14,900원</label>
+                <label class="radio-label"><input type="radio" name="희망금액" value="14900원 이상"> ▲ 14,900원 이상</label>
+            </div>
+        </div>
+
+        <div class="section-title" id="section-4-title">⑷ 수정 보완 및 피드백</div>
+
+        <div class="form-group">
+            <label for="new-feature">정식 출시 때 꼭 추가되었으면 하는 새로운 기능이나 캐릭터 콘셉트</label>
+            <textarea id="new-feature" name="희망기능" rows="3" placeholder="아이디어를 자유롭게 제안해 주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="cheer">개발팀과 azomi 캐릭터들에게 전하고 싶은 응원의 한마디!</label>
+            <textarea id="cheer" name="응원한마디" rows="3" placeholder="따뜻한 응원은 개발팀에게 큰 힘이 됩니다 💖"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="free-comment">※ 테스트 후 개인적으로 하시고 싶은 말씀이 있다면 편하게 말씀해 주세요.</label>
+            <textarea id="free-comment" name="자유의견" rows="3" placeholder="자유롭게 기재해 주세요"></textarea>
+        </div>
+
+        <div class="section-title">🎁 감사 인사</div>
+
+        <div class="gifticon-box">
+            <div class="title">소정의 기프티콘을 보내드려요!</div>
+            <div class="desc">끝까지 CBT 테스트에 참여하신 모든 분들께 감사의 의미로 기프티콘을 보내드립니다.<br>받으실 카카오톡 아이디(또는 연락처)를 남겨주세요.</div>
+            <input type="text" id="kakao-id" name="기프티콘_카톡ID" placeholder="카카오톡 ID 또는 연락처를 입력해 주세요">
+        </div>
+
+        <button type="submit" id="submit-btn">피드백 제출하기 🚀</button>
+
+        <div id="success-message">
+            ✅ 피드백이 정상적으로 접수되었습니다.<br>성실한 테스트 참여 진심으로 감사드립니다!<br>기프티콘은 순차적으로 발송될 예정입니다 💌
+        </div>
+        <div id="error-message">
+            ⚠️ 제출 중 문제가 발생했습니다.<br>잠시 후 다시 시도해 주시거나, 메일로 직접 문의 부탁드립니다.
+        </div>
+    </form>
+
+    <footer style="background: #334155; padding: 15px 15px 18px; text-align: center; color: #DDD6FE; font-size: 13px;">
+        - azomi -
+        <div id="close-window-wrap" style="display:none; margin-top: 12px;">
+            <button type="button" id="close-window-btn" onclick="tryCloseWindow()" style="background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer;">
+                창 닫기
+            </button>
+            <div id="close-fallback-msg" style="display:none; font-size: 12px; color: #DDD6FE; margin-top: 10px; line-height: 1.6;">
+                브라우저 정책상 자동으로 닫히지 않는 탭이에요.<br><strong style="color:#fff;">Ctrl + W</strong> 를 눌러 닫아주시면 됩니다 🙏<br><span style="font-size:11px; opacity:0.8;">(Mac은 Cmd + W)</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // 창 닫기 시도 → 최신 브라우저는 대부분 막지만, 구형/일부 브라우저에서 통하는 우회 트릭까지 순서대로 시도
+    function tryCloseWindow() {
+        try {
+            window.close();
+        } catch (e) {}
+
+        try {
+            window.open('', '_self');
+            window.close();
+        } catch (e) {}
+
+        // 위 시도들이 실패해 페이지가 여전히 떠 있으면 안내 문구로 전환
+        setTimeout(function () {
+            document.getElementById('close-window-btn').style.display = 'none';
+            document.getElementById('close-fallback-msg').style.display = 'block';
+        }, 300);
+    }
+
+    function handleSubscribeChange(value) {
+        const priceGroup = document.getElementById('price-group');
+        const thanksBox = document.getElementById('no-interest-thanks');
+        const section4 = document.getElementById('section-4-title');
+
+        if (value === '의향 없음') {
+            priceGroup.style.display = 'none';
+            thanksBox.style.display = 'block';
+            setTimeout(function () {
+                section4.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 250);
+        } else {
+            priceGroup.style.display = 'block';
+            thanksBox.style.display = 'none';
+        }
+    }
+
+    // Formspree 비동기 제출 (성공/실패 메시지 인라인 표시)
+    const form = document.getElementById('feedback-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('success-message');
+    const errorMsg = document.getElementById('error-message');
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = '제출 중...';
+        errorMsg.style.display = 'none';
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                form.style.display = 'none';
+                successMsg.style.display = 'block';
+
+                // 성공 시 헤더 문구를 종료 안내로 변경 + 창닫기 버튼 노출
+                document.getElementById('header-title').innerHTML =
+                    '<span class="logo-mark"><img src="https://github.com/miname20002-cloud/aurae-backend/blob/main/assets/images/icon.png?raw=true" alt="azomi"></span>CBT 리서치 종료';
+                document.getElementById('header-desc').innerHTML =
+                    '소중한 시간 내어 참여해 주셔서 진심으로 감사합니다.<br>보내주신 의견은 azomi를 더 다정하게 만드는 데 소중히 쓰이겠습니다.';
+                document.getElementById('close-window-wrap').style.display = 'block';
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (err) {
+            errorMsg.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = '피드백 제출하기 🚀';
+        }
+    });
+</script>
+
+</body>
+</html>
